@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  reddit-clone:
+    container_name: reddit-clone-service
+    image: reddit-clone:latest  # Use the image name directly
+    ports:
+      - "3001:3000"  # Exposing port 3000
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
