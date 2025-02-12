@@ -1,7 +1,7 @@
-# Use Node.js 19 with Alpine Linux for a small image
-FROM node:19-alpine3.15
+# Use Node.js 18 (stable version) with Alpine Linux for a small image
+FROM node:18-alpine
 
-# Set working directory inside the container
+# Set the working directory inside the container
 WORKDIR /reddit-clone
 
 # Copy package.json and package-lock.json separately to install dependencies first
