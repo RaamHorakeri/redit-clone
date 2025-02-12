@@ -2,16 +2,16 @@
 FROM node:18-alpine
 
 # Set the working directory inside the container
-WORKDIR /reddit-clone
+WORKDIR /reddit-clone-k8s-ingress-main
 
 # Copy package.json and package-lock.json separately to install dependencies first
-COPY ./package*.json ./
+COPY ./reddit-clone-k8s-ingress-main/package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application files
-COPY . .
+COPY ./reddit-clone-k8s-ingress-main .
 
 # Expose the necessary port
 EXPOSE 3000
