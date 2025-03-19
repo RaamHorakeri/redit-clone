@@ -5,13 +5,13 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy package.json and package-lock.json first to leverage Docker caching
-COPY reddit-clone-k8s-ingress-main/package*.json ./
+COPY package*.json ./
 
 # Install dependencies using npm ci for reproducible builds
 RUN npm ci --omit=dev
 
 # Copy the rest of the application files
-COPY ./reddit-clone-k8s-ingress-main/ ./
+COPY . .
 
 # Expose the necessary port
 EXPOSE 3000
