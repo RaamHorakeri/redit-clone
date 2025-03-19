@@ -1,20 +1,24 @@
-# Use Node.js 18 (stable version) with Alpine Linux for a small image
+# Use Node.js 18 with Alpine for a smaller image
 FROM node:18-alpine
 
 # Set the working directory inside the container
-WORKDIR /reddit-clone-k8s-ingress-main
+WORKDIR /app
 
-# Copy package.json and package-lock.json separately to install dependencies first
-COPY ./reddit-clone-k8s-ingress-main/package*.json ./
+# Copy package.json and package-lock.json first to leverage Docker caching
+COPY reddit-clone-k8s-ingress-main/package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies using npm ci for reproducible builds
+RUN npm ci --omit=dev
 
 # Copy the rest of the application files
-COPY ./reddit-clone-k8s-ingress-main .
+COPY reddit-clone-k8s-ingress-main ./
 
 # Expose the necessary port
 EXPOSE 3000
 
-# Start the app
+# Use a non-root user for security
+RUN adduser -D appuser
+USER appuser
+
+# Start the application
 CMD ["npm", "run", "dev"]
