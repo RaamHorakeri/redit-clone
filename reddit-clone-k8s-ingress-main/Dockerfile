@@ -11,7 +11,7 @@ COPY reddit-clone-k8s-ingress-main/package*.json ./
 RUN npm ci --omit=dev
 
 # Copy the rest of the application files
-COPY reddit-clone-k8s-ingress-main ./
+COPY ./reddit-clone-k8s-ingress-main/ ./
 
 # Expose the necessary port
 EXPOSE 3000
